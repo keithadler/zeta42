@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" width="560" height="560" font-family="ui-sans-serif, system-ui, sans-serif">
+<rect width="560" height="560" fill="#fbfaf8"/>
+<text x="46" y="30" font-size="17" font-weight="600" fill="#2a2724">Haugland's 21-vertex seed — 7-fold symmetry</text>
+<text x="46" y="48" font-size="12.5" fill="#7c746a">Heptagon {7/1} + heptagrams {7/2}, {7/3} + 7 unit triangles. 42 edges, 84 arc directions.</text>
+<g stroke="#b9b2a8" stroke-width="1.1" stroke-linecap="round">
+<line x1="185.51" y1="514.00" x2="374.49" y2="514.00"/>
+<line x1="185.51" y1="514.00" x2="67.68" y2="366.25"/>
+<line x1="185.51" y1="514.00" x2="159.48" y2="326.82"/>
+<line x1="185.51" y1="514.00" x2="334.60" y2="397.87"/>
+<line x1="374.49" y1="514.00" x2="492.32" y2="366.25"/>
+<line x1="374.49" y1="514.00" x2="211.92" y2="417.64"/>
+<line x1="374.49" y1="514.00" x2="376.65" y2="325.03"/>
+<line x1="492.32" y1="366.25" x2="450.27" y2="182.00"/>
+<line x1="492.32" y1="366.25" x2="315.62" y2="433.28"/>
+<line x1="492.32" y1="366.25" x2="345.92" y2="246.73"/>
+<line x1="450.27" y1="182.00" x2="280.00" y2="100.00"/>
+<line x1="450.27" y1="182.00" x2="392.51" y2="361.94"/>
+<line x1="450.27" y1="182.00" x2="265.55" y2="221.94"/>
+<line x1="280.00" y1="100.00" x2="109.73" y2="182.00"/>
+<line x1="280.00" y1="100.00" x2="384.67" y2="257.35"/>
+<line x1="280.00" y1="100.00" x2="196.06" y2="269.32"/>
+<line x1="109.73" y1="182.00" x2="67.68" y2="366.25"/>
+<line x1="109.73" y1="182.00" x2="298.01" y2="198.27"/>
+<line x1="109.73" y1="182.00" x2="189.78" y2="353.19"/>
+<line x1="67.68" y1="366.25" x2="197.79" y2="229.19"/>
+<line x1="67.68" y1="366.25" x2="251.43" y2="410.40"/>
+<line x1="159.48" y1="326.82" x2="315.62" y2="433.28"/>
+<line x1="159.48" y1="326.82" x2="298.01" y2="198.27"/>
+<line x1="159.48" y1="326.82" x2="334.60" y2="397.87"/>
+<line x1="211.92" y1="417.64" x2="392.51" y2="361.94"/>
+<line x1="211.92" y1="417.64" x2="197.79" y2="229.19"/>
+<line x1="211.92" y1="417.64" x2="376.65" y2="325.03"/>
+<line x1="315.62" y1="433.28" x2="384.67" y2="257.35"/>
+<line x1="315.62" y1="433.28" x2="345.92" y2="246.73"/>
+<line x1="392.51" y1="361.94" x2="298.01" y2="198.27"/>
+<line x1="392.51" y1="361.94" x2="265.55" y2="221.94"/>
+<line x1="384.67" y1="257.35" x2="197.79" y2="229.19"/>
+<line x1="384.67" y1="257.35" x2="196.06" y2="269.32"/>
+<line x1="298.01" y1="198.27" x2="189.78" y2="353.19"/>
+<line x1="197.79" y1="229.19" x2="251.43" y2="410.40"/>
+<line x1="334.60" y1="397.87" x2="265.55" y2="221.94"/>
+<line x1="334.60" y1="397.87" x2="196.06" y2="269.32"/>
+<line x1="376.65" y1="325.03" x2="196.06" y2="269.32"/>
+<line x1="376.65" y1="325.03" x2="189.78" y2="353.19"/>
+<line x1="345.92" y1="246.73" x2="189.78" y2="353.19"/>
+<line x1="345.92" y1="246.73" x2="251.43" y2="410.40"/>
+<line x1="265.55" y1="221.94" x2="251.43" y2="410.40"/>
+</g>
+<circle cx="185.51" cy="514.00" r="9" fill="#d94a4a" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="374.49" cy="514.00" r="9" fill="#3b7dd8" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="492.32" cy="366.25" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="450.27" cy="182.00" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="280.00" cy="100.00" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="109.73" cy="182.00" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="67.68" cy="366.25" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="159.48" cy="326.82" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="211.92" cy="417.64" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="315.62" cy="433.28" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="392.51" cy="361.94" r="9" fill="#3b7dd8" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="384.67" cy="257.35" r="9" fill="#3b7dd8" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="298.01" cy="198.27" r="9" fill="#d94a4a" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="197.79" cy="229.19" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="334.60" cy="397.87" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="376.65" cy="325.03" r="9" fill="#e8a33d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="345.92" cy="246.73" r="9" fill="#3b7dd8" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="265.55" cy="221.94" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="196.06" cy="269.32" r="9" fill="#d94a4a" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="189.78" cy="353.19" r="9" fill="#3aa66d" stroke="#fbfaf8" stroke-width="1.6"/>
+<circle cx="251.43" cy="410.40" r="9" fill="#d94a4a" stroke="#fbfaf8" stroke-width="1.6"/>
+</svg>

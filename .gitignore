@@ -1,0 +1,19 @@
+# environments and caches
+.venv/
+__pycache__/
+
+# external clones (fetch per README, not vendored)
+external/
+
+# regenerable artifacts: CNF exports, cube files, caches, solver logs
+*.cnf
+*.cnf.cubes
+# ...except the two open frontier instances (see README, "The deep end")
+!t7pair_dial.cnf
+!t7core_dial.cnf
+*.log
+g1-cache.json
+g3-edges.json
+
+# large rendered output (regenerate with draw.py)
+degrey-G.svg
