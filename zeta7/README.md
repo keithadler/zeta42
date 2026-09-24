@@ -252,4 +252,12 @@ extra-rows gain, and about twice the formalisation's proven margin (~0.019). The
 profile was inflated by small size. These are actual values, not proven bounds. Logs:
 `zeta5_bands_n2.txt`, `zeta5_bands_n3.txt`.
 
+### Deeper search (`zeta5_deep.py`, log `zeta5_deep_log.txt`)
+
+Twelve bands, exponents −1..8, an optional factor `t^m`, α up to 1.35: 355 profiles at n = 1, then the
+8 best re-scored at n = 2. Best at n = 2: `e = (5,4,2,1,0)`, factor `t`, α = 1.15, log P = **−1079.15**
+(gain 0.038 per K² over the paper, against −1064.40 for the previous best). Three different profiles
+land between −1072 and −1079, so the improvement plateaus around 0.036–0.038 per K² (~30%). The n = 1
+ranking does not predict the n = 2 ranking: the n = 2 winner was 8th at n = 1.
+
 Requires `pip install python-flint mpmath sympy`.
