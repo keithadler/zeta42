@@ -166,6 +166,28 @@ the rate, so it changes the analytic side for the first time in this search (`ha
 A slower-decaying weight is worse. A faster one (only even poles) raises the denominators to
 `d_{2K}⁷` for K poles, so it is worse by construction. The paper's integer spacing is the optimum.
 
+## Round 7: four more ideas, each tested
+
+* **Factor the determinant** (`factor_test.py`). A factor `Q | P` would also be a nonzero integer
+  polynomial at ζ(s), and possibly a much smaller one. But `P` is irreducible over ℤ in every case
+  tested: ζ(3), ζ(5) and ζ(7), including the paper's own configuration. Dead.
+* **Per-prime decomposition of the gap** (`prime_profile.py`, K = 40, plain construction).
+  Contributions to −log content / K², by band of p/K:
+
+  | p/K | ≤1/8 | 1/8–1/4 | 1/4–1/2 | 1/2–1 | >1 | total |
+  |---|---|---|---|---|---|---|
+  | ζ(5) | 0.885 | 0.218 | 1.143 | 0.586 | 0 | 2.832 |
+  | ζ(7) | 1.197 | 0.307 | 1.456 | 0.751 | 0 | 3.711 |
+
+  The ζ(7) cost is about 1.3 times ζ(5)'s in **every** band, so there is no single prime range to
+  target. It scales with the power `s` in `d_K^s` uniformly.
+* **Hankel determinants of the Beukers measure** `(−log z)^{s−1}/(1−z)` on (0,1)
+  (`beukers_hankel.py`). The moments are `(s−1)!(ζ(s) − H_k^{(s)})`, so the determinant is a positive
+  linear form `qζ(s) − p`. It fails even for ζ(3): `log` of the value is +2.6·h². Dead.
+* **A faster-decaying weight** (poles at 2ℤ or 3ℤ). The analytic side improves (−3.60 against −2.54
+  per m² at spacing 2), but the arithmetic more than doubles (7.09 against 3.36). Net +3.49 and +6.16
+  against +0.82. With half-integers (round 6) this makes unit spacing optimal from both sides.
+
 ## Side result: ζ(5) with more rows (`zeta5_margin.py`)
 
 The paper's construction (K = 40n, N = 3n, `D_N⁶`) with h = α(K − N), at n = 1:
