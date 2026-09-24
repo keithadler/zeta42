@@ -223,14 +223,16 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule);
 <p>Any candidate can be scored in minutes with the code in <code>zeta7/</code>.</p>
 
 <h2><span class="n">7</span> A side result for ζ(5)</h2>
-<p>Gram positivity holds for any number of rows, while \(\deg\Delta \le \#\text{poles}\). The paper uses \(h = \#\text{poles}\), but slightly more rows helps. In the paper's own configuration at \(n = 1\) (\(K = 40\)):</p>
+<p>Gram positivity holds for any number of rows, while \(\deg\Delta \le \#\text{poles}\). The paper uses \(h = \#\text{poles} = 37n\). Changing only \(h\), in the paper's own configuration:</p>
 <div class="table-wrap">
 <table>
-  <thead><tr><th>rows h</th><th>37 (paper)</th><th>41</th><th>44</th><th>48</th><th>41, with factor t</th></tr></thead>
+  <thead><tr><th>n</th><th>h = 37n (paper)</th><th>h ≈ 1.05·37n</th><th>h ≈ 1.10·37n</th><th>h ≈ 1.15·37n</th><th>gain per K²</th></tr></thead>
   <tbody>
-    <tr><td>log P(ζ(5))</td><td class="num">−265.13</td><td class="num neg">−286.77</td><td class="num">−266.76</td><td class="num">−217.64</td><td class="num neg">−291.98</td></tr>
+    <tr><td>1</td><td class="num">−265.13</td><td class="num"></td><td class="num neg">−286.77</td><td class="num"></td><td class="num">0.0135</td></tr>
+    <tr><td>2</td><td class="num">−833.33</td><td class="num">−910.91</td><td class="num neg">−923.81</td><td class="num">−847.08</td><td class="num">0.0141</td></tr>
+    <tr><td>3</td><td class="num">−1804.01</td><td class="num">−1990.66</td><td class="num neg">−2005.23</td><td class="num">−1919.48</td><td class="num">0.0140</td></tr>
   </tbody>
-  <caption>For the plain construction with 40 poles, \(h = 48\) gives −0.097 per m² against −0.010 at \(h = 40\). This is checked at one size only, and has not yet been checked at \(n = 2, 3\).</caption>
+  <caption>\(\log P_K(\zeta(5))\). The first column reproduces the paper's published values. About 10% extra rows is best at every size, and the gain per \(K^2\) is steady at 0.014. The formalisation's proven margin is about 0.019 per \(K^2\). The gain is measured on actual values, not on proven bounds.</caption>
 </table>
 </div>
 

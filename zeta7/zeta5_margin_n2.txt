@@ -1,0 +1,12 @@
+n=2 K=80 alpha=1.00 h= 74 t^0: deg  74  log P(zeta5) =    -833.33  /n^2 =   -208.33  (255s)
+n=2 K=80 alpha=1.00 h= 74 t^1: deg  74  log P(zeta5) =    -855.63  /n^2 =   -213.91  (257s)
+n=2 K=80 alpha=1.05 h= 78 t^0: deg  74  log P(zeta5) =    -910.91  /n^2 =   -227.73  (311s)
+n=2 K=80 alpha=1.05 h= 78 t^1: deg  74  log P(zeta5) =    -916.22  /n^2 =   -229.05  (314s)
+n=2 K=80 alpha=1.10 h= 81 t^0: deg  74  log P(zeta5) =    -923.81  /n^2 =   -230.95  (353s)
+n=2 K=80 alpha=1.10 h= 81 t^1: deg  74  log P(zeta5) =    -928.17  /n^2 =   -232.04  (356s)
+n=2 K=80 alpha=1.15 h= 85 t^0: deg  74  log P(zeta5) =    -847.08  /n^2 =   -211.77  (423s)
+n=2 K=80 alpha=1.15 h= 85 t^1: deg  74  log P(zeta5) =    -841.66  /n^2 =   -210.41  (424s)
+n=2 K=80 alpha=1.20 h= 89 t^0: deg  74  log P(zeta5) =    -749.50  /n^2 =   -187.37  (503s)
+n=2 K=80 alpha=1.20 h= 89 t^1: deg  74  log P(zeta5) =    -723.97  /n^2 =   -180.99  (506s)
+
+[exited with code 0]

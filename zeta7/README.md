@@ -190,9 +190,21 @@ A slower-decaying weight is worse. A faster one (only even poles) raises the den
 
 ## Side result: ζ(5) with more rows (`zeta5_margin.py`)
 
-The paper's construction (K = 40n, N = 3n, `D_N⁶`) with h = α(K − N), at n = 1:
-α = 1 gives −265.13 (the paper's value, reproduced), α = 1.1 gives **−286.77**, α = 1.2 gives −266.76,
-α = 1.3 gives −217.64. An extra factor `t` adds a little at α = 1 to 1.1 (−280.20 and −291.98). This
-is one size only; it still needs checking at n = 2 and 3.
+Gram positivity holds for any number of rows h, while `deg Δ ≤ #poles`. Take the paper's own
+construction (K = 40n, N = 3n, `D_N⁶/D_K`, `#poles = 37n`) and change only h = α·37n.
+`log P_K(ζ(5))`, exact primitive content, certified evaluation:
+
+| n | α = 1 (paper) | α = 1.05 | α = 1.10 | α = 1.15 | α = 1.20 | gain at α = 1.1, per K² |
+|---|---|---|---|---|---|---|
+| 1 | −265.13 | | **−286.77** | | −266.76 | 0.0135 |
+| 2 | −833.33 | −910.91 | **−923.81** | −847.08 | −749.50 | 0.0141 |
+| 3 | −1804.01 | −1990.66 | **−2005.23** | −1919.48 | | 0.0140 |
+
+The α = 1 column reproduces the paper's published values exactly. α ≈ 1.1 is best at every size, and
+the gain per K² is steady at about 0.014 (8.2%, 10.9% and 11.2% of the value). For comparison, the
+proven margin of the formalisation is about 0.019 per K² (constant 1.348 against 1.367). The gain is
+measured on the actual values, not on proven bounds, and whether it carries over to the paper's
+bounds is open. Logs: `zeta5_margin_n2.txt`, `zeta5_margin_n3.txt`. An extra factor `t` adds a
+little at α ≤ 1.1 (n = 2, α = 1.1: −928.17).
 
 Requires `pip install python-flint mpmath sympy`.
