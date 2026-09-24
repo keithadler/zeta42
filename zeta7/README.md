@@ -136,4 +136,18 @@ you need a **different weight or a different positive structure**: for example a
 Gram/Andréief integral whose kernel produces ζ(7) with different arithmetic, or a weight whose pole
 moments bring in `H_j^{(7)}` with built-in cancellation. The `w = y⁷F⁽⁶⁾` family itself is exhausted.
 
+## Round 5: the remaining gaps in the family
+
+* **Root 0 of Π**: a numerator factor `t^m`, i.e. the weight `y^{7+2m}F^{(6)}` (K = 20). For ζ(7),
+  m = 1 changes nothing (+0.699 vs +0.698 with `D_2^4`), and larger m is steadily worse
+  (m = 10: +1.86). For ζ(5), m = 1 is marginally better (−0.276 vs −0.268).
+* **Other structures reduce to the measure.** A Gram matrix of rational functions `p_a/Q` against μ
+  is the polynomial Gram against `μ/Q²`. Adding positive point masses only makes the Gram determinant
+  larger. A positive integer combination of constructions is at least as large as each term at ζ(7),
+  and a signed combination loses positivity. So for one-dimensional Gram structures, the measure is
+  the only thing that matters, and the measure family is exhausted.
+* **What remains open** is a genuinely two-dimensional positive measure (a non-product density on
+  `(0,∞)²`) whose moments are linear in ζ(7) alone. The natural kernels give multiple zeta values
+  instead, and no clean candidate is known to us. That would be new mathematics, not a search.
+
 Requires `pip install python-flint mpmath sympy`.

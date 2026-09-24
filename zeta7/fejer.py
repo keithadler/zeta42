@@ -36,16 +36,17 @@ def score_W(s, K, W):
     for c in co: v += arb(int(c.p))/arb(int(c.q))*zp; zp *= zz
     assert v > 0
     return (float(v.log()) - (math.log(g) - math.log(l))) / K**2
-K = 20
-cands = {}
-for L in (3, 5, 7):
-    cands[f"product prod_(i<=L)(z+i), L={L} (control)"] = sympy.prod([z + i for i in range(1, L+1)])
-    cands[f"Legendre-type sum_k C(L,k)C(L+k,k)C(z,k), L={L}"] = sum(comb(L, k)*comb(L+k, k)*sympy.binomial(z, k) for k in range(L+1))
-    cands[f"Apery-type sum_k C(L,k)^2 C(L+k,k) C(z+k,k), L={L}"] = sum(comb(L, k)**2*comb(L+k, k)*sympy.expand_func(sympy.binomial(z+k, k)) for k in range(L+1))
-    cands[f"central sum_k C(L,k)^2 C(z,k), L={L}"] = sum(comb(L, k)**2*sympy.binomial(z, k) for k in range(L+1))
-for name, Pi in cands.items():
-    Pi = sympy.expand(sympy.expand_func(Pi))
-    den = sympy.Poly(Pi, z).clear_denoms()[0]
-    Pi = sympy.expand(Pi * den)
-    W = N_from_Pi(Pi)
-    print(f"{name:52s} s=5 {score_W(5, K, W):+.4f}   s=7 {score_W(7, K, W):+.4f}", flush=True)
+if __name__ == "__main__":
+  K = 20
+  cands = {}
+  for L in (3, 5, 7):
+      cands[f"product prod_(i<=L)(z+i), L={L} (control)"] = sympy.prod([z + i for i in range(1, L+1)])
+      cands[f"Legendre-type sum_k C(L,k)C(L+k,k)C(z,k), L={L}"] = sum(comb(L, k)*comb(L+k, k)*sympy.binomial(z, k) for k in range(L+1))
+      cands[f"Apery-type sum_k C(L,k)^2 C(L+k,k) C(z+k,k), L={L}"] = sum(comb(L, k)**2*comb(L+k, k)*sympy.expand_func(sympy.binomial(z+k, k)) for k in range(L+1))
+      cands[f"central sum_k C(L,k)^2 C(z,k), L={L}"] = sum(comb(L, k)**2*sympy.binomial(z, k) for k in range(L+1))
+  for name, Pi in cands.items():
+      Pi = sympy.expand(sympy.expand_func(Pi))
+      den = sympy.Poly(Pi, z).clear_denoms()[0]
+      Pi = sympy.expand(Pi * den)
+      W = N_from_Pi(Pi)
+      print(f"{name:52s} s=5 {score_W(5, K, W):+.4f}   s=7 {score_W(7, K, W):+.4f}", flush=True)
