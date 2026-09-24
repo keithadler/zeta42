@@ -4,7 +4,7 @@ from mpmath import mp, mpf, quad, polylog, exp, pi, zeta, inf, factorial, identi
 mp.dps = 40
 def Fd(y, m):  # m-th derivative of F, m even: (2pi)^m Li_{-m}(e^{-2pi y})
     return (2*pi)**m * polylog(-m, exp(-2*pi*y))
-for s in (5, 7):
+for s in (3, 5, 7):
     c = factorial(s-1)/2
     for j in range(1, 7):
         I = quad(lambda y: y**s*Fd(y, s-1)/(y*y+j*j)/c, [0, 0.05, 0.5, 2, 10, inf])

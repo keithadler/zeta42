@@ -49,4 +49,43 @@ in the style of Zudilin or Rivoal, well-poised symmetry, or a different weight.
 
 These are small-K numerics (K ≤ 80), not asymptotic proofs in either direction.
 
+## Round 2: searching the whole family
+
+`profile.py` generalises the construction to any exponent profile: the measure
+`w(y) · ∏_j (t+j²)^{e_j}` with `e_j ∈ {-1, 0, 1, …}`, where `e_j = -1` marks a pole. Numerator zeros
+can sit below or above the poles or be interleaved with them, and `h` can be any number of rows up
+to the number of poles. A change of basis only rescales `Δ`, so the primitive `P` is unchanged, and
+this is the complete knob set for this weight. The code reproduces the paper's −265.13 again (the
+paper's `D_3^6/D_40` is net exponent 5 on `j ≤ 3`). Scores below are `log P(ζ7)/h²`, which does not
+depend on the size of the construction.
+
+| Try | Best `log P/h²` |
+|---|---|
+| Hill-climb over 8-block profiles, exponents −1..6, varying h (`search.py`, 807 shapes, 9 restarts, `search_s7_log.txt`) | **+0.69** at 15 poles (a finite-size effect, see below). Every local minimum is positive. |
+| Fewer rows than poles (`knobs.py`) | +0.73·K² at best (vs +0.75) |
+| Numerator zeros above the poles, as in Ball–Rivoal (`knobs.py`) | worse: +1.09 to +8.4 |
+| Numerator zeros at half-integers, `(4t+i²)` with `i` odd (`halfint.py`) | worse: +1.18 to +2.01 |
+| No polynomial part (to avoid the Bernoulli cost) | impossible: the X coefficient `∑ res_j j⁶` vanishes when `R = O(t⁻⁴)`, so B is singular |
+
+**Finite size.** For the plain construction (poles 1..K, h = K) the score rises steadily with K:
+
+| K | 10 | 15 | 20 | 30 | 40 | 60 | 80 |
+|---|---|---|---|---|---|---|---|
+| ζ(5) | −0.34 | −0.14 | −0.08 | −0.06 | −0.01 | +0.03 | +0.07 |
+| ζ(7) | +0.52 | +0.69 | +0.82 | +0.89 | +0.97 | +1.02 | +1.07 |
+
+So small constructions always look better, and the search's best shapes are just small. Plain ζ(5)
+also turns positive, which is why the paper needs `D_N^6`.
+
+**Scaling in s** (plain construction, K = 40): ζ(3) **−0.95**, ζ(5) **−0.01**, ζ(7) **+0.97**,
+ζ(9) **+1.86**. Each step of 2 in s costs about 0.93·K². The real side barely moves (−2.96, −2.84,
+−2.74, −2.65); the arithmetic side grows. `diag.py` (a diagnostic, not a valid construction) puts
+the extra cost in the denominators of `H_j^{(s)}`: removing them saves 1.21·K² for s = 5 and 2.03·K²
+for s = 7. The 0.82 difference is essentially the whole ζ(7) gap.
+
+**Bottom line.** Within this family the method proves ζ(3) easily and ζ(5) with a thin margin (the
+paper's result), and it misses ζ(7) by roughly one full step. Closing the gap needs a new source of
+p-adic savings on `∑ c_j j⁶ H_j^{(7)}` of about 0.8·h², which is more than any numerator profile tested
+here provides. It also cannot come from dropping the polynomial part.
+
 Requires `pip install python-flint mpmath`.
