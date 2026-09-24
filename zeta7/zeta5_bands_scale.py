@@ -15,6 +15,7 @@ def run(arg):
 if __name__ == "__main__":
     n = int(sys.argv[1])
     cfgs = [((4, 4, 3, 2, 0, 0), 1.2), ((5, 4, 2, 2, 0, 0), 1.2), ((5, 5, 3, 1), 1.1)]
+    if len(sys.argv) > 2: cfgs = [cfgs[int(i)] for i in sys.argv[2].split(',')]
     with mp.Pool(3) as pool:
         for n_, ex, a, h, m, lP, dt in pool.imap(run, [(n, ex, a) for ex, a in cfgs]):
             print(f"n={n_} bands={ex} alpha={a} poles={m} h={h}: log P(zeta5) = {lP:+.2f}  /n^2 = {lP/n_**2:+.2f}  ({dt:.0f}s)", flush=True)

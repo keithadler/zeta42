@@ -1,0 +1,8 @@
+n=1 bands=(4, 4, 3, 2, 0, 0) alpha=1.2 poles=34 h=41: log P(zeta5) = -344.53  /n^2 = -344.53  (3s)
+n=1 bands=(5, 4, 2, 2, 0, 0) alpha=1.2 poles=34 h=41: log P(zeta5) = -344.36  /n^2 = -344.36  (3s)
+n=1 bands=(5, 5, 3, 1) alpha=1.1 poles=36 h=40: log P(zeta5) = -327.67  /n^2 = -327.67  (2s)
+n=2 bands=(4, 4, 3, 2, 0, 0) alpha=1.2 poles=68 h=82: log P(zeta5) = -1060.84  /n^2 = -265.21  (165s)
+n=2 bands=(5, 4, 2, 2, 0, 0) alpha=1.2 poles=68 h=82: log P(zeta5) = -1048.37  /n^2 = -262.09  (165s)
+n=2 bands=(5, 5, 3, 1) alpha=1.1 poles=72 h=79: log P(zeta5) = -1064.40  /n^2 = -266.10  (151s)
+
+[exited with code 0]
