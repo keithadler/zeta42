@@ -5,7 +5,21 @@ from math import gcd, lcm
 from flint import fmpq, fmpq_mat, fmpq_poly, arb, ctx
 from profile import build, staircase
 def delta_poly(s, e, h):
+    """Delta(X) = det(A + X B) = det(A) * det(I + X M), M = A^{-1} B, via one characteristic
+    polynomial: det(I + X M) = (-X)^h chi_M(-1/X). Works for any rank of B (h > #poles allowed)."""
     a, b = build(s, e, h)
+    A = fmpq_mat(h, h, [a[i+j] for i in range(h) for j in range(h)])
+    B = fmpq_mat(h, h, [b[i+j] for i in range(h) for j in range(h)])
+    dA = A.det()
+    if dA == 0:
+        return delta_poly_interp(s, e, h, a, b)
+    chi = (A.inv() * B).charpoly()          # chi(l) = sum c_k l^k, degree h
+    # det(I + X M) = sum_k c_k (-1)^(h-k) ... : (-X)^h chi(-1/X) = sum_k c_k (-1)^(h-k) X^(h-k)
+    co = [fmpq(0)]*(h+1)
+    for k in range(h+1):
+        co[h-k] = chi[k] * (-1)**(h-k)
+    return fmpq_poly(co) * dA
+def delta_poly_interp(s, e, h, a, b):
     m = sum(1 for v in e.values() if v == -1)
     d = min(m, h)
     xs = list(range(d+1))
