@@ -150,4 +150,27 @@ moments bring in `H_j^{(7)}` with built-in cancellation. The `w = y⁷F⁽⁶⁾
   `(0,∞)²`) whose moments are linear in ζ(7) alone. The natural kernels give multiple zeta values
   instead, and no clean candidate is known to us. That would be new mathematics, not a search.
 
+## Round 6: a different weight (poles at half-integers)
+
+Hermite's formula holds for real `a > 0`. At `a = j/2` with `j` odd it gives
+`j⁶((127/64)ζ(7) − 2 O_j) − 1/6 + 1/j`, where `O_j` is the sum of `1/m⁷` over odd `m ≤ j`. This was
+checked to 40 digits, and it is still linear in ζ(7) alone. Only the denominator 2 works: with 3 or
+more, other L-values appear. After rescaling, this is the weight `y⁷F⁽⁶⁾(y/2)`, which decays at half
+the rate, so it changes the analytic side for the first time in this search (`halfpoles.py`).
+
+| m poles, h = m | integer poles (control) | half-integer spacing | odd half-integers only |
+|---|---|---|---|
+| 20 | +0.820 | +1.037 | +3.488 |
+| 40 | +0.970 | +1.292 | +4.039 |
+
+A slower-decaying weight is worse. A faster one (only even poles) raises the denominators to
+`d_{2K}⁷` for K poles, so it is worse by construction. The paper's integer spacing is the optimum.
+
+## Side result: ζ(5) with more rows (`zeta5_margin.py`)
+
+The paper's construction (K = 40n, N = 3n, `D_N⁶`) with h = α(K − N), at n = 1:
+α = 1 gives −265.13 (the paper's value, reproduced), α = 1.1 gives **−286.77**, α = 1.2 gives −266.76,
+α = 1.3 gives −217.64. An extra factor `t` adds a little at α = 1 to 1.1 (−280.20 and −291.98). This
+is one size only; it still needs checking at n = 2 and 3.
+
 Requires `pip install python-flint mpmath sympy`.
