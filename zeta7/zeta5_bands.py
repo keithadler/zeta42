@@ -1,8 +1,9 @@
-"""zeta(5) banding: per-j numerator exponents e_1..e_B on the first B values of j (each e_j in
+"""zeta(s) banding (s from argv, default 5): per-j numerator exponents e_1..e_B on the first B values of j (each e_j in
 -1..8; -1 = pole), poles for B < j <= K, rows h = alpha * #poles. Hill-climb from the paper's
 choice (e = 5 on j <= 3). Score: log P(zeta5) / K^2 at fixed K (paper at n=1: -265.13/1600)."""
 import sys, multiprocessing as mp
 from manyrows import score
+S = int(sys.argv[1]) if len(sys.argv) > 1 else 5
 K, B = 40, 8
 def profile(ex, K):
     e = {j: v for j, v in enumerate(ex, start=1) if v != 0}
@@ -12,7 +13,7 @@ def ev(arg):
     ex, a = arg
     e = profile(ex, K); m = sum(1 for v in e.values() if v == -1)
     if m < 30: return None
-    try: return score(5, e, round(a*m))[1] / K**2
+    try: return score(S, e, round(a*m))[1] / K**2
     except Exception: return None
 def nbrs(ex, a):
     out = []
@@ -28,6 +29,9 @@ if __name__ == "__main__":
     pool = mp.Pool(4); seen = {}
     starts = [((5, 5, 5, -1, -1, -1, -1, -1), 1.0), ((5, 5, 5, -1, -1, -1, -1, -1), 1.1),
               ((6, 5, 4, 3, -1, -1, -1, -1), 1.1), ((4, 4, 4, 4, -1, -1, -1, -1), 1.1)]
+    if S == 7:
+        starts = [((4, 4, 4, 4, 4, -1, -1, -1), 1.0), ((4, 4, 4, 4, 4, -1, -1, -1), 1.1),
+                  ((5, 4, 3, 2, 0, 0, -1, -1), 1.1), ((6, 5, 4, 3, 2, 1, -1, -1), 1.1)]
     for st in starts:
         cur = st; cv = ev(cur); seen[cur] = cv
         while True:
@@ -38,7 +42,7 @@ if __name__ == "__main__":
             if not c or min(c)[0] >= cv: break
             cv, cur = min(c)
             print(f"  step -> {cur}  {cv:+.4f}  (log P = {cv*K*K:+.2f})", flush=True)
-        print(f"start {st} -> {cur}  score {cv:+.4f}  (log P = {cv*K*K:+.2f})", flush=True)
+        print(f"s={S} start {st} -> {cur}  score {cv:+.4f}  (log P = {cv*K*K:+.2f})", flush=True)
     top = sorted((v, k) for k, v in seen.items() if v is not None)[:6]
     print(f"evaluated {len(seen)}; best:")
     for v, k in top: print(f"  {v:+.4f}  (log P = {v*K*K:+.2f})  e={k[0]} alpha={k[1]}")
