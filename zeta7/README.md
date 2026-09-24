@@ -112,4 +112,28 @@ is the cost of the `1/k⁷`. Closing it would take rational functions whose tail
 0.8·h² of extra p-adic divisibility, the analogue of the well-poised symmetry in Ball–Rivoal and
 Zudilin transported to this Hankel setting. That is a derivation to attempt, not a parameter sweep.
 
-Requires `pip install python-flint mpmath`.
+## Round 4: the full positive family for this weight
+
+**The ζ(7) part of an entry is a Beukers-type integral.** By Hermite's formula,
+`∑_j ρ_j j⁶ (ζ(7) − H_j^{(7)}) = (1/720) ∫₀¹ (−log z)⁶ P(z)/(1−z) dz` with `P(z) = ∑_j ρ_j j⁶ z^j`.
+So the arithmetic depends only on the residues of `R`.
+
+**Every admissible measure is known.** `R = N/D_K` is a positive measure exactly when `N ≥ 0` on
+`[0,∞)`, which happens exactly when `N(y²) = |Π(iy)|²` for a real polynomial `Π`
+(Fejér–Riesz / Markov–Lukács). The residues are then `c_j ∝ Π(j)Π(−j)/D'(−j²)`.
+* `Π` with integer roots gives the product family `∏(t+i²)^{e_i}` (rounds 1–3).
+* Half-integer roots give `(4t+i²)` (round 3, worse).
+* Non-product `Π` (`fejer.py`: Legendre-, Apéry- and central-binomial-type sums, degree 3–7, K = 20)
+  is **always much worse** than the integer-root product of the same degree. At degree 3 the scores
+  are +0.97 to +1.42 against the control's +0.79 for ζ(7), and +0.03 to +0.50 against −0.15 for ζ(5).
+* Residue shapes chosen directly (`designs.py`: squared binomials, Apéry-like, reflection-symmetric)
+  mostly give `R` that changes sign, so they are not positive measures. That is checked exactly by
+  square-free factorisation plus root counting in `residues.py`. The two that are positive are worse.
+
+**Conclusion for this weight.** The integer-root product numerators searched in rounds 1–3 are the
+arithmetic optimum of the whole positive family, and they miss ζ(7) by about 0.8·h². To go further
+you need a **different weight or a different positive structure**: for example a two-dimensional
+Gram/Andréief integral whose kernel produces ζ(7) with different arithmetic, or a weight whose pole
+moments bring in `H_j^{(7)}` with built-in cancellation. The `w = y⁷F⁽⁶⁾` family itself is exhausted.
+
+Requires `pip install python-flint mpmath sympy`.
