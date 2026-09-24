@@ -206,6 +206,15 @@ nonzero at ζ(s). That is the positivity substitute a 3-way structure needs (`ni
 * So a genuine Nikishin system needs many new poles. Integer poles cost new harmonic-sum denominators,
   half-integer poles were worse in round 6, and other positions break linearity in ζ(7). **Dead.**
 
+## Round 9: banding plus extra rows on ζ(7)
+
+The combination that gives ζ(5) ~30% (tapered per-j exponents on the first 8 values of j, with
+h = α·#poles, α ∈ [1, 1.2]) was hill-climbed for ζ(7) at K = 40 from four starts (426 profiles,
+`zeta7_bands_n1.txt`). Best: `e = (6,5,4,3,2,0,0)`, α = 1.0, score **+0.705** per K², against the
+earlier best of +0.733. That gain of about 0.03 is about the size banding gives ζ(5), but ζ(7) is
+more than 20 times further from zero. Every best ζ(7) profile chooses α = 1.0, so extra rows do not
+help ζ(7) at all.
+
 ## Side result: ζ(5) with more rows (`zeta5_margin.py`)
 
 Gram positivity holds for any number of rows h, while `deg Δ ≤ #poles`. Take the paper's own
