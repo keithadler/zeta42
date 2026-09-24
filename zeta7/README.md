@@ -65,7 +65,7 @@ depend on the size of the construction.
 | Fewer rows than poles (`knobs.py`) | +0.73·K² at best (vs +0.75) |
 | Numerator zeros above the poles, as in Ball–Rivoal (`knobs.py`) | worse: +1.09 to +8.4 |
 | Numerator zeros at half-integers, `(4t+i²)` with `i` odd (`halfint.py`) | worse: +1.18 to +2.01 |
-| No polynomial part (to avoid the Bernoulli cost) | impossible: the X coefficient `∑ res_j j⁶` vanishes when `R = O(t⁻⁴)`, so B is singular |
+| No polynomial part (to avoid the Bernoulli cost) | impossible: the X coefficient `∑ res_j j⁶` vanishes when `R = O(t⁻⁵)`, so B is singular |
 
 **Finite size.** For the plain construction (poles 1..K, h = K) the score rises steadily with K:
 

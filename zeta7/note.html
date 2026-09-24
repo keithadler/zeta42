@@ -1,0 +1,250 @@
+<title>The ζ(7) Barrier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@500;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }, svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.js"></script>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --paper: #ffffff;
+  --ink: #1a1f2b;
+  --muted: #586072;
+  --rule: #d8dce4;
+  --accent: #1d5a87;
+  --good: #1f7a4d;
+  --bad: #a3392e;
+  --tint: #eef3f8;
+  --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111419; --paper: #171b22; --ink: #e5e8ee; --muted: #9ba3b2; --rule: #2c323d;
+    --accent: #82b8e0; --good: #6fcf9c; --bad: #ef8f83; --tint: #1c2530;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111419; --paper: #171b22; --ink: #e5e8ee; --muted: #9ba3b2; --rule: #2c323d;
+  --accent: #82b8e0; --good: #6fcf9c; --bad: #ef8f83; --tint: #1c2530;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 40px 64px;
+}
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: clamp(20px, 5vw, 56px);
+}
+header { display: grid; gap: 10px; margin-bottom: 28px; }
+.kicker {
+  font-family: var(--sans); font-weight: 600; font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--accent);
+}
+h1 {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(30px, 6vw, 40px);
+  line-height: 1.15; margin: 0; text-wrap: balance;
+}
+.subtitle { color: var(--muted); font-size: 18px; margin: 0; max-width: 38rem; }
+.meta { font-family: var(--sans); font-size: 13px; color: var(--muted); }
+h2 {
+  font-family: var(--sans); font-weight: 600; font-size: 19px; line-height: 1.3;
+  margin: 40px 0 10px; text-wrap: balance; display: flex; gap: 10px; align-items: baseline;
+}
+h2 .n { color: var(--accent); font-variant-numeric: tabular-nums; }
+h3 { font-family: var(--sans); font-weight: 600; font-size: 15px; margin: 24px 0 6px; }
+p, li { max-width: 65ch; }
+p { margin: 0 0 14px; }
+ul { padding-left: 1.2em; margin: 0 0 14px; display: grid; gap: 6px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.abstract {
+  background: var(--tint); border-left: 3px solid var(--accent);
+  padding: 16px 18px; margin: 0 0 8px; border-radius: 0 3px 3px 0;
+}
+.abstract p:last-child { margin-bottom: 0; }
+.label {
+  font-family: var(--sans); font-weight: 600; font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px;
+}
+.math { overflow-x: auto; overflow-y: hidden; margin: 6px 0 16px; }
+.table-wrap { overflow-x: auto; margin: 8px 0 18px; }
+table {
+  border-collapse: collapse; width: 100%; font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: right; vertical-align: top; }
+th:first-child, td:first-child { text-align: left; }
+th {
+  font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: .03em;
+  color: var(--muted); border-bottom: 1.5px solid var(--ink);
+}
+td.num { font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+.pos { color: var(--bad); }
+.neg { color: var(--good); }
+caption {
+  caption-side: bottom; text-align: left; font-size: 13.5px; color: var(--muted);
+  padding-top: 8px; line-height: 1.45;
+}
+code, pre { font-family: var(--mono); font-size: 13.5px; }
+pre {
+  background: var(--tint); padding: 12px 14px; border-radius: 3px;
+  overflow-x: auto; line-height: 1.5; margin: 6px 0 16px;
+}
+.verdict {
+  font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .05em;
+  text-transform: uppercase; white-space: nowrap;
+}
+.caveat { font-size: 15px; color: var(--muted); }
+footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); font-family: var(--sans); font-size: 13px; color: var(--muted); }
+@media (max-width: 480px) { body { font-size: 16px; } th, td { padding: 6px 6px; } }
+</style>
+
+<main>
+<header>
+  <span class="kicker">Research note · draft · September 2026</span>
+  <h1>The ζ(7) Barrier</h1>
+  <p class="subtitle">Numerical evidence that the Hankel-determinant method behind the recent irrationality proof of ζ(5) does not extend to ζ(7), and a measurement of by how much.</p>
+  <span class="meta">Computations with exact rational arithmetic (python-flint) and certified ball arithmetic. Code: <code>keithadler/zeta42</code>, directory <code>zeta7/</code>.</span>
+</header>
+
+<section class="abstract">
+  <span class="label">Summary</span>
+  <p>A. Fauzan's preprint <em>ζ(5) is irrational</em> (17 September 2026; Lean formalisation at <a href="https://github.com/mo271/zeta5">mo271/zeta5</a>) builds integer polynomials \(P_K\) of degree linear in \(n\) from Hankel determinants of a positive moment functional, and shows \(0 &lt; P_K(\zeta(5)) \le e^{-cn^2}\). We generalise the construction to \(\zeta(s)\) for odd \(s\) and measure \(\log P_K(\zeta(s))\) exactly, using the primitive part of each determinant, which is the best normalisation any proof could reach.</p>
+  <p>The method gives \(-0.95\), \(-0.01\), \(+0.97\), \(+1.86\) (units of \(K^2\)) for \(s = 3, 5, 7, 9\) in its plain form. It works easily for ζ(3), barely for ζ(5), and misses ζ(7) by roughly one step. Across about fifteen variations, including a complete description of the admissible measures, no ζ(7) configuration comes out negative. The excess comes from the denominators of \(H_j^{(7)}\) and is spread evenly over all prime ranges.</p>
+</section>
+
+<h2><span class="n">1</span> The construction for general odd s</h2>
+<p>Let \(F(y) = 1/(e^{2\pi y}-1)\) and take the weight \(w_s(y) = y^s F^{(s-1)}(y) \big/ \tfrac{(s-1)!}{2}\), which is positive on \((0,\infty)\) because \(F\) is completely monotone. Writing \(t = y^2\), its moment functional satisfies</p>
+<div class="math">\[
+\mu(t^k) = (-1)^k B_{2k+2}\,\frac{(2k+s)!}{(2k+2)!\,(s-1)!},
+\qquad
+\mu\!\left(\frac{1}{t+j^2}\right) = j^{s-1}\bigl(\zeta(s) - H_j^{(s)}\bigr) - \frac{1}{s-1} + \frac{1}{2j}.
+\]</div>
+<p>For \(s = 5\) this is the paper's Hermite formula, with constant \(-\tfrac14 + \tfrac{1}{2j}\). For \(s = 3, 7\) we identified the constant \(-\tfrac{1}{s-1} + \tfrac{1}{2j}\) numerically to 40 digits; it agrees with Hermite's formula for the Hurwitz zeta function, which also holds at non-integer \(a = j/2\).</p>
+<p>Replacing \(\zeta(s)\) by a variable \(X\) gives \(\mu_X\). For a rational function \(R(t) = W(t)/D_K(t)\), with \(D_m(t) = \prod_{j\le m}(t+j^2)\), form the Hankel matrix \(G_{ab} = \mu_X(t^{a+b}R)\), where \(a, b &lt; h\), and set \(\Delta(X) = \det G\). Then \(\Delta(\zeta(s)) &gt; 0\) as a Gram determinant, \(\deg \Delta \le \#\text{poles}\), and \(P_K\) is the primitive part of \(\Delta\) in \(\mathbb{Z}[X]\). Since the degree grows linearly, \(\zeta(s)\) is irrational if \(\log P_K(\zeta(s)) \le -c\,n^2\). The paper takes \(K = 40n\), \(N = 3n\), \(W = D_N^6\), \(h = 37n\).</p>
+<p><strong>Validation.</strong> The code reproduces the paper's value \(\log P_{40}(\zeta(5)) = -265.13\) exactly, using two independent implementations.</p>
+
+<h2><span class="n">2</span> The main measurement: dependence on s</h2>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>s</th><th>analytic side<br>log Δ(ζ(s)) / K²</th><th>arithmetic side<br>−log content / K²</th><th>total<br>log P / K²</th></tr></thead>
+  <tbody>
+    <tr><td>3</td><td class="num">−2.962</td><td class="num">+2.015</td><td class="num neg">−0.947</td></tr>
+    <tr><td>5</td><td class="num">−2.842</td><td class="num">+2.832</td><td class="num neg">−0.010</td></tr>
+    <tr><td>7</td><td class="num">−2.741</td><td class="num">+3.711</td><td class="num pos">+0.970</td></tr>
+    <tr><td>9</td><td class="num">−2.653</td><td class="num">+4.514</td><td class="num pos">+1.860</td></tr>
+  </tbody>
+  <caption>Plain construction: poles \(1..K\), \(W = 1\), \(h = K = 40\). Negative totals are needed for irrationality. The analytic side barely moves with \(s\); the arithmetic side grows by about 0.83 per step of 2.</caption>
+</table>
+</div>
+
+<h3>Dependence on size</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>K</th><th>10</th><th>15</th><th>20</th><th>30</th><th>40</th><th>60</th><th>80</th></tr></thead>
+  <tbody>
+    <tr><td>ζ(5)</td><td class="num neg">−0.336</td><td class="num neg">−0.145</td><td class="num neg">−0.083</td><td class="num neg">−0.061</td><td class="num neg">−0.010</td><td class="num pos">+0.032</td><td class="num pos">+0.068</td></tr>
+    <tr><td>ζ(7)</td><td class="num pos">+0.518</td><td class="num pos">+0.690</td><td class="num pos">+0.820</td><td class="num pos">+0.885</td><td class="num pos">+0.970</td><td class="num pos">+1.017</td><td class="num pos">+1.065</td></tr>
+  </tbody>
+  <caption>Plain construction, \(\log P/K^2\). Scores rise with \(K\), so small constructions always look better. Plain ζ(5) turns positive, which is why the paper needs \(D_N^6\).</caption>
+</table>
+</div>
+
+<h2><span class="n">3</span> Where the ζ(7) excess comes from</h2>
+<p><strong>The harmonic sums.</strong> As a diagnostic (not a valid construction), setting \(H_j^{(s)} := 0\) lowers the arithmetic cost by \(1.21K^2\) for \(s = 5\) and by \(2.03K^2\) for \(s = 7\). The difference, 0.82, is nearly the whole gap between the two.</p>
+<p><strong>No weak prime range.</strong> Splitting \(-\log(\text{content})\) into contributions \(-v_p \log p\):</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>p / K</th><th>≤ 1/8</th><th>1/8–1/4</th><th>1/4–1/2</th><th>1/2–1</th><th>&gt; 1</th><th>total</th></tr></thead>
+  <tbody>
+    <tr><td>ζ(5)</td><td class="num">0.885</td><td class="num">0.218</td><td class="num">1.143</td><td class="num">0.586</td><td class="num">0</td><td class="num">2.832</td></tr>
+    <tr><td>ζ(7)</td><td class="num">1.197</td><td class="num">0.307</td><td class="num">1.456</td><td class="num">0.751</td><td class="num">0</td><td class="num">3.711</td></tr>
+  </tbody>
+  <caption>Units of \(K^2\), \(K = 40\), plain construction. ζ(7) costs about 1.3 times as much in every band, so no construction aimed at one prime range can close the gap.</caption>
+</table>
+</div>
+
+<h2><span class="n">4</span> Structural facts about the family</h2>
+<ul>
+  <li><strong>Every admissible measure is known.</strong> The measure \(w_s(y)R(y^2)\) is positive exactly when the numerator satisfies \(N(y^2) = |\Pi(iy)|^2\) for a real polynomial \(\Pi\) (Fejér–Riesz / Markov–Lukács). Residues are then \(c_j \propto \Pi(j)\Pi(-j)/D'(-j^2)\). Integer roots of \(\Pi\) give the product numerators \(\prod(t+i^2)^{e_i}\). Root 0 gives the factor \(t^m\), which is the weight \(y^{s+2m}F^{(s-1)}\).</li>
+  <li><strong>The Bernoulli part cannot be avoided.</strong> The coefficient of \(X\) in \(\mu_X(R)\) is \(\sum_j \operatorname{res}_j\, j^{s-1}\), and it vanishes when \(R = O(t^{-(s+3)/2})\), which follows from expanding \(R\) at infinity. So \(X\) appears only if \(R\) keeps high-degree mass, which forces the polynomial part and its Bernoulli moments.</li>
+  <li><strong>The ζ(s) part is a Beukers-type integral.</strong> \(\sum_j \rho_j j^{s-1}(\zeta(s) - H_j^{(s)}) = \frac{1}{(s-1)!}\int_0^1 (-\log z)^{s-1}\frac{\sum_j \rho_j j^{s-1} z^j}{1-z}\,dz\), so the arithmetic depends only on the residues.</li>
+  <li><strong>Other one-dimensional Gram structures reduce to the measure.</strong> A Gram matrix of \(p_a/Q\) against \(\mu\) is the polynomial Gram against \(\mu/Q^2\). Positive point masses only enlarge the determinant. Positive combinations of constructions are at least as large as each term, and signed ones lose positivity.</li>
+  <li><strong>The determinants are irreducible.</strong> \(P_K\) is irreducible over \(\mathbb{Z}\) in every case tested, including the paper's, so no smaller factor can be split off.</li>
+</ul>
+
+<h2><span class="n">5</span> Variations tested for ζ(7)</h2>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Variation</th><th>best ζ(7) score</th><th>outcome</th></tr></thead>
+  <tbody>
+    <tr><td>Paper's parameters \(D_3^6/D_{40}\), \(h = 37\)</td><td class="num pos">+0.767 (K=40), +0.846 (K=80)</td><td class="verdict pos">fails</td></tr>
+    <tr><td>Single level \(D_N^r\), grid over N, r</td><td class="num pos">+0.754 (K=40), +0.826 (K=80)</td><td class="verdict pos">fails</td></tr>
+    <tr><td>Two-level \(D_{N_1}^{r_1}D_{N_2}^{r_2}\)</td><td class="num pos">+0.737</td><td class="verdict pos">fails</td></tr>
+    <tr><td>Hill-climb over block exponent profiles (807 shapes)</td><td class="num pos">all local minima &gt; 0</td><td class="verdict pos">fails</td></tr>
+    <tr><td>Fewer rows than poles, \(h &lt; m\)</td><td class="num pos">+0.733</td><td class="verdict pos">fails</td></tr>
+    <tr><td>More rows than poles, \(h &gt; m\) (legal: degree ≤ m)</td><td class="num pos">+0.826 vs +0.820</td><td class="verdict pos">fails</td></tr>
+    <tr><td>Numerator factors above the poles (Ball–Rivoal style)</td><td class="num pos">+1.09 to +8.39</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Numerator zeros at half-integers \((4t+i^2)\)</td><td class="num pos">+1.18 to +2.01</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Factor \(t^m\) (weight \(y^{7+2m}F^{(6)}\))</td><td class="num pos">+0.699 vs +0.698</td><td class="verdict pos">no gain</td></tr>
+    <tr><td>Non-product \(\Pi\): Legendre, Apéry, central-binomial sums</td><td class="num pos">+0.97 to +2.55 (control +0.79 to +0.95)</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Residues shaped directly (squared binomials, symmetric)</td><td class="num pos">mostly not positive; rest worse</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Poles at half-integers (weight \(y^7F^{(6)}(y/2)\))</td><td class="num pos">+1.037 vs +0.820</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Poles at \(2\mathbb{Z}\), \(3\mathbb{Z}\) (faster weight)</td><td class="num pos">+3.49, +6.16</td><td class="verdict pos">worse</td></tr>
+    <tr><td>\(|\text{Vandermonde}|^4\) via de Bruijn Pfaffian</td><td class="num pos">+2.80 per deg² (ζ(5): +1.15)</td><td class="verdict pos">worse</td></tr>
+    <tr><td>Hankel of the Beukers measure \((-\log z)^6/(1-z)\)</td><td class="num pos">+7.61 per h² (ζ(3): +2.59)</td><td class="verdict pos">worse</td></tr>
+  </tbody>
+  <caption>Scores are \(\log P/K^2\) (\(K\) the largest pole index) or per \(m^2\), \(h^2\) or degree² as marked, at \(K \le 80\). Each variant was run on ζ(5) as a control.</caption>
+</table>
+</div>
+
+<h2><span class="n">6</span> What would be needed</h2>
+<p>Within this framework, a proof for ζ(7) needs about \(0.8\,h^2\) of extra \(p\)-adic cancellation in the sums \(\sum_j c_j\, j^6 H_j^{(7)}\), spread across all prime ranges, or an analytic gain of the same size. Neither is available from any admissible measure for the Hermite weight. The questions we cannot answer:</p>
+<ul>
+  <li>Is there a positive measure, possibly on \((0,\infty)^2\) and not a product, whose moments are linear in ζ(7) alone and whose arithmetic avoids the full \(d_K^7\)?</li>
+  <li>Does a well-poised symmetry in the style of Ball–Rivoal and Zudilin have an analogue for these Hankel determinants, giving savings on \(H_j^{(7)}\) denominators?</li>
+  <li>Can the analytic side be made to improve with \(s\), as it does for Ball–Rivoal linear forms, while keeping a single constant?</li>
+</ul>
+<p>Any candidate can be scored in minutes with the code in <code>zeta7/</code>.</p>
+
+<h2><span class="n">7</span> A side result for ζ(5)</h2>
+<p>Gram positivity holds for any number of rows, while \(\deg\Delta \le \#\text{poles}\). The paper uses \(h = \#\text{poles}\), but slightly more rows helps. In the paper's own configuration at \(n = 1\) (\(K = 40\)):</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>rows h</th><th>37 (paper)</th><th>41</th><th>44</th><th>48</th><th>41, with factor t</th></tr></thead>
+  <tbody>
+    <tr><td>log P(ζ(5))</td><td class="num">−265.13</td><td class="num neg">−286.77</td><td class="num">−266.76</td><td class="num">−217.64</td><td class="num neg">−291.98</td></tr>
+  </tbody>
+  <caption>For the plain construction with 40 poles, \(h = 48\) gives −0.097 per m² against −0.010 at \(h = 40\). This is checked at one size only, and has not yet been checked at \(n = 2, 3\).</caption>
+</table>
+</div>
+
+<h2><span class="n">8</span> Caveats</h2>
+<p class="caveat">All results are numerical, at \(K \le 80\). They measure the exact content of each determinant, so a positive score is an obstruction for that construction at that size, but they are not an asymptotic proof in either direction. The \(s = 7\) Hermite formula was identified numerically to 40 digits. The hill-climb covers block profiles with 8 blocks, not every exponent sequence.</p>
+
+<h2><span class="n">9</span> Reproducing</h2>
+<pre>pip install python-flint mpmath sympy
+cd zeta7
+python3 hankel_s.py 5 40 3 6 1        # paper check: log P = -265.13
+python3 profile.py                    # general profiles, same check
+python3 sweep.py 7 40 4,5,6,7 2,3,4,5,6
+python3 prime_profile.py              # the per-prime table
+python3 zeta5_margin.py 1 1.0,1.1,1.2,1.3 0,1</pre>
+
+<footer>Draft prepared for discussion. The ζ(5) result and its formalisation belong to their authors; this note only studies whether their method extends.</footer>
+</main>
