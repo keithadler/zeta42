@@ -188,6 +188,24 @@ A slower-decaying weight is worse. A faster one (only even poles) raises the den
   per m² at spacing 2), but the arithmetic more than doubles (7.09 against 3.36). Net +3.49 and +6.16
   against +0.82. With half-integers (round 6) this makes unit spacing optimal from both sides.
 
+## Round 8: the "cube" (Nikishin / multiple-orthogonality determinants)
+
+Mixed determinants `det[μ_X(t^{i+k} g_r)]` with row types `g_0 = R`, `g_1 = f·R` (and `f²·R`), where
+`f = ∑ c_j/(t+j²)`, `c_j > 0`, is a Markov function on the negative axis. By Andréief the determinant is
+`∫ det[φ_r(t_a)]·Vandermonde(t) ∏dμ`, and for an AT system both factors have fixed sign, so it is
+nonzero at ζ(s). That is the positivity substitute a 3-way structure needs (`nikishin.py`,
+`nikishin2.py`).
+
+* **f with new poles** (`j = 21..30` or `21..40`, K = 20, 20 rows). Every entry is still linear in ζ(s),
+  but the scores are much worse: ζ(5) goes from −0.083 (Gram control) to +0.91..+3.05, and ζ(7) from
+  +0.820 to +2.50..+5.36. The new poles bring new `H_j^{(s)}` denominators up to `d_{40}^s`.
+* **f with poles cancelled by the numerator** (`j ≤ N` inside `D_N^r`). `f·R` is then a polynomial
+  times the base measure, so the second family adds at most N independent functions. The mixed
+  determinant collapses to the single-measure case, which is identically zero once there are more than
+  N extra rows.
+* So a genuine Nikishin system needs many new poles. Integer poles cost new harmonic-sum denominators,
+  half-integer poles were worse in round 6, and other positions break linearity in ζ(7). **Dead.**
+
 ## Side result: ζ(5) with more rows (`zeta5_margin.py`)
 
 Gram positivity holds for any number of rows h, while `deg Δ ≤ #poles`. Take the paper's own
