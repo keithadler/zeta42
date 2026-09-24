@@ -225,4 +225,22 @@ measured on the actual values, not on proven bounds, and whether it carries over
 bounds is open. Logs: `zeta5_margin_n2.txt`, `zeta5_margin_n3.txt`. An extra factor `t` adds a
 little at α ≤ 1.1 (n = 2, α = 1.1: −928.17).
 
+### Banding (`zeta5_bands.py`, `zeta5_bands_scale.py`)
+
+Give each band of small j its own numerator exponent instead of the paper's single `e = 5` on
+`j ≤ 3n`, together with extra rows. A hill-climb at n = 1 (299 profiles, logged in `zeta5_bands_n1.txt`)
+finds tapered profiles. Band i covers `j ∈ ((i−1)n, in]`, and `j > Bn` are poles up to K = 40n.
+
+| n | paper | extra rows only | bands (4,4,3,2,0,0), h = 1.2·#poles | bands (5,5,3,1), h = 1.1·#poles |
+|---|---|---|---|---|
+| 1 | −265.13 | −286.77 | −344.53 | −327.67 |
+| 2 | −833.33 | −923.81 | −1060.84 | −1064.40 |
+| 3 | −1804.01 | −2005.23 | **−2346.33** | −2312.23 |
+| gain / K² at n = 1, 2, 3 | | 0.0135, 0.0141, 0.0140 | 0.050, 0.036, 0.038 | 0.039, 0.036, 0.035 |
+
+From n = 2 on, both banded profiles gain a steady ~0.036 per K² over the paper, about 2.6 times the
+extra-rows gain, and about twice the formalisation's proven margin (~0.019). The n = 1 value of the first
+profile was inflated by small size. These are actual values, not proven bounds. Logs:
+`zeta5_bands_n2.txt`, `zeta5_bands_n3.txt`.
+
 Requires `pip install python-flint mpmath sympy`.
