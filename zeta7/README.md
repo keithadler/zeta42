@@ -88,4 +88,28 @@ paper's result), and it misses ζ(7) by roughly one full step. Closing the gap n
 p-adic savings on `∑ c_j j⁶ H_j^{(7)}` of about 0.8·h², which is more than any numerator profile tested
 here provides. It also cannot come from dropping the polynomial part.
 
+## Round 3: leads outside the original family
+
+**Lead 1: more rows than poles** (`manyrows.py`). Gram positivity holds for any number of rows h,
+while `deg Δ ≤ m = #poles`. So h > m is a legal, untested regime, and for fixed m the criterion only
+asks for `P(ζ) → 0`. `Δ` is computed by exact interpolation of `det(A + xB)`.
+* One pole (an Apéry-type linear form with positivity for free): `log P` grows with h even for ζ(3).
+  Dead.
+* h slightly above m **helps ζ(5)**. Plain ζ(5) (poles 1..m, `log P/m²`): m = 20 goes from −0.083
+  (h = 20) to −0.211 (h = 24); m = 40 goes from −0.010 (h = 40) to −0.097 (h = 48). That gain is about
+  the same size as the paper's `D_N^6` and could combine with it. It is a side lead for a larger ζ(5)
+  margin.
+* It does **not** help ζ(7): plain goes from +0.820 to +0.826 at best, and with `D_5^r` it gets worse.
+
+**Lead 2: |Vandermonde|⁴ instead of |Vandermonde|²** (`beta4.py`). By de Bruijn's formula the h-fold
+integral with `∏(t_i − t_k)^4` is `h!·Pf[(b−a) μ_X(t^{a+b−1} W/D)]`. It is still a positive polynomial
+in X, and `log P_Pf = ½ log P_det` by Gauss's lemma. It is much worse: at degree 14, ζ(5) scores +1.15
+and ζ(7) +2.80. The higher-index Bernoulli moments cost more than the stronger repulsion gains. Dead.
+
+**Open lead: a tail-sum reformulation.** With Hermite's formula,
+`μ(R) = X·∑_j res_j j⁶ − ∑_{k} S(k)/k⁷ + (rational)`, where `S(k) = ∑_{j≥k} res_j j⁶`. The ζ(7) gap
+is the cost of the `1/k⁷`. Closing it would take rational functions whose tail sums `S(k)` carry about
+0.8·h² of extra p-adic divisibility, the analogue of the well-poised symmetry in Ball–Rivoal and
+Zudilin transported to this Hankel setting. That is a derivation to attempt, not a parameter sweep.
+
 Requires `pip install python-flint mpmath`.

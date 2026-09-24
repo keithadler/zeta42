@@ -9,7 +9,7 @@ from flint import fmpq, fmpz, fmpz_poly, fmpq_poly, fmpq_mat, arb, ctx
 def build(s, e, h):
     """e: dict j -> exponent. Returns Hankel data a (const part), b (X part) for indices 0..2h-2."""
     poles = sorted(j for j, v in e.items() if v == -1)
-    assert 0 < h <= len(poles)
+    assert 0 < h   # h > #poles allowed: Gram positivity holds for any h; deg Delta <= #poles
     W = fmpz_poly([1]); Den = fmpz_poly([1])
     for j, v in e.items():
         if v > 0: W *= fmpz_poly([j*j, 1])**v
