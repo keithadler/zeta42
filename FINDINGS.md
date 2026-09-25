@@ -121,8 +121,8 @@ script, not inferred.
       Q(zeta_42)'s 7 is ramified in zeta_7 AND split in zeta_3.
     - G1 template on 54-, 90- and 486-arc alphabets, pairs 0--i*sqrt3 and
       0--2, paths <= 6 (<= 5 for 486): every 7-core EMPTY.  Largest
-      survivors (5-core 776v, 6-core 621v, 90 arcs) are 3-chromatic, pair
-      free at k=4 and 5.  The 486-arc system: no T5 vertex has 7 neighbours
+      survivors (5-core 776v and 6-core 621v on 90 arcs; 6-core 369v on 54)
+      are 3-chromatic, pair free at k=4 and 5.  The 486-arc system: no T5 vertex has 7 neighbours
       in T4.  Arc count is not density -- a data point for note.md section 4.
 
 ## Interpretation (running)

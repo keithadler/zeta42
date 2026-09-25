@@ -49,7 +49,8 @@ Answer (all exact except (1), which is a continuous check):
      alphabet (arcs)     pair     n  core   T_n     core size     chi  forced?
      roots only (18)     i*sqrt3  6  7      438     empty
      1+7 (54)            i*sqrt3  6  6,7    5478    empty
-     1+7 (54)            2        6  6,7    4425    empty
+     1+7 (54)            2        6  6      4425    369v/1378e    3    no/no
+     1+7 (54)            2        6  7      4425    empty
      1+7+13 (90)         i*sqrt3  6  5      15642   776v/2945e    3    no/no
      1+7+13 (90)         i*sqrt3  6  6,7    15642   empty
      1+7+13 (90)         2        6  6      12289   621v/2314e    3    no/no
