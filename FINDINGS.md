@@ -125,6 +125,22 @@ script, not inferred.
       are 3-chromatic, pair free at k=4 and 5.  The 486-arc system: no T5 vertex has 7 neighbours
       in T4.  Arc count is not density -- a data point for note.md section 4.
 
+13c. **Ramified-and-split test: Q(zeta_20) PASSES on density, not on forcing.**
+    `zeta20.py`.  Hypothesis from 13b: density needs a prime ramified in the
+    n-part and split in the CM direction (7 in Q(zeta_42)); 5 in Q(zeta_20)
+    is one (e=4 in Q(zeta_5), split in Q(i)).  Pass/fail fixed in advance.
+    - Arcs over 5: exactly 160 (= 20 roots x a in +-1..+-4), 40 per depth;
+      the doubly ramified 2 gives 0.  Counts match the ramification exactly.
+    - G1 template, pair 0--phi (phi = |1+zeta_5| native): depth-1 arcs alone
+      (60) give T5 = 1558 and a 7-core of 2132v/14986e; all 180 arcs give a
+      7-core of 4580v and an 8-core of 2980v.  All cores CHI = 4 -- the first
+      4-chromatic template cores outside the heptagonal world (Q(zeta_9),
+      Q(zeta_5): empty or 3-chromatic).  Pair 0--2: 7-core 213v, chi 4.
+    - No forcing: every pair is free at k = 4 and k = 5 (SAT, instantly),
+      where heptagonal G1 is 5-chromatic and forced at k = 4.
+    Q(zeta_20) has no unit triangles (no zeta_3); that is the prime suspect
+    for the chi = 4 ceiling.  Next test: Q(zeta_60).
+
 ## Interpretation (running)
 
 - Level-4 forcing primitives are tight (spindle: 7 vertices force 4 colours).
