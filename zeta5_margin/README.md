@@ -1,0 +1,76 @@
+# ζ(5): a larger proven margin from a better comparison measure
+
+Fauzan's proof (17 Sep 2026; working edition and Lean project at
+[long-mathematics/zeta5-irrationality](https://github.com/long-mathematics/zeta5-irrationality))
+ends with
+
+    limsup K⁻² log Q_{K,M}(ζ(5))  ≤  A_M + U,
+
+where `A_M` is the arithmetic (p-adic) constant and `U` the real one. `U` is certified with a
+hand-built comparison measure: 16 nested arcsine pieces, `U = −1.366996`. This directory
+replaces that measure with a better one. **Nothing else in the proof changes.**
+
+## Result
+
+| | paper | `measure64.json` | `measure256.json` |
+|---|---|---|---|
+| certified `U` (upper bound) | −1.366996 | **−1.383658** | **−1.384938** |
+| cells checked | 684 | 31,813 | 113,890 |
+| `Q_{40n,200}(ζ5) < exp(−c n²)` | c = 27.8 | c = 54 | **c = 56.5** |
+| `Q_{40n,100000}(ζ5) < exp(−c n²)` | c = 79.07 | c = 105 | **c = 107.7** |
+| irrationality measure: `\|ζ(5) − a/b\| > b^−μ` | μ = 260 | μ = 198 | **μ = 191** |
+
+The margin `−(A_M + U)` goes from 0.0174 to 0.0354 per K² at M = 200 (about ×2) and from
+0.0494 to 0.0674 at M = 100000 (about +36%). Run `python constants.py` for the exact rational
+witnesses. For μ = 191 they are ε = 1077/16000, c = 55/4, ρc − 191 = −137/400 and
+ε − λ/c = 7/176000.
+
+**Ceiling.** The best that *any* comparison measure can give is the weighted equilibrium value,
+`U* ≈ −1.38544` (`equilibrium.py`, converged over 200 to 1600 cells). The paper leaves 0.0184
+per K² on the table. `measure256.json` recovers 0.0179 of it (97%), so the real side is now
+essentially exhausted. The next gains have to come from `A_M`.
+
+## What is checked, and how
+
+`certify.py` makes the argument of the working edition's `verify_A` (Appendix A) rigorous for
+any nested arcsine measure:
+
+* rational data, exact mass 37/40, nested supports in (0, 2), every length > 1/225;
+* `2U^ρ(t) − V(t) < M₀` on [0, 2]. Nesting makes `U^ρ` monotone between consecutive
+  endpoints, and `V` has a single minimum at `q ∈ [q₋, q₊]`, so a cell passes if
+  `2·max(U(l), U(r)) − inf V < M₀`. Failing cells are bisected;
+* the tail condition of the confinement lemma at t = 2;
+* the closed-form energy `I(ρ)`, `C_*`, and `U = λM₀ − I(ρ) + C_*`.
+
+The arithmetic is python-flint `arb`: rigorous ball arithmetic, outward-rounded, at 200 bits.
+**Control:** on the paper's own data (`paper16.json`, MIT, from long-mathematics) it reproduces
+the published certificate exactly: 684 cells, worst bound −6.645002689, and
+U = −1.366995564511.
+
+The lemmas that depend on ρ are the comparison-measure proposition, the regularisation lemma
+and the confinement lemma. The regularisation lemma's constant `60√ε` uses only
+`Σ c_j = λ < 1` and `b_j − a_j > 1/225`, so it holds for any number of components. All three
+are covered by the checks above.
+
+## Caveats
+
+* This is a Python certificate, not a Lean proof. To adopt it, the Lean project's interval
+  checker would have to replay 31,813 or 113,890 cells instead of 684. That is more work but
+  the same kind of work. `measure64.json` captures 90% of the gain at about a quarter of the cells.
+* μ = 191 comes from the paper's own Appendix C argument with only ε changed. The relative-norm
+  constant ρ = 6933/500 is already optimal for that argument: optimising `a, b` improves κ only
+  from 13.8659 to 13.8635.
+* The arithmetic constant `A_M` is taken from the working edition unchanged. It was not
+  re-derived here.
+
+## Reproduce
+
+```
+pip install python-flint numpy scipy cvxpy
+python certify.py paper16.json       # control, <1 s
+python certify.py measure64.json     # ~25 s
+python certify.py measure256.json    # ~5 min
+python constants.py                  # theorem constants, exact
+python equilibrium.py                # the ceiling U*
+python search.py 256 out.json        # rebuild a measure (~10 min), then certify it
+```

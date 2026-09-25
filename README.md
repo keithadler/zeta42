@@ -66,6 +66,7 @@ measured and what the result was):
 | `census.py` | cross-field unit-coincidence census |
 | `alpha510.py` | independence number probe (fractional bound diagnostic) |
 | `pent_b.py`, `pent_b2.py` | Haugland-template transplant to ℚ(ζ₅) (cores empty) |
+| `zeta5_margin/` | ζ(5): certified better comparison measure for Fauzan's proof — decay 27.8→56.5, irrationality measure 260→191 |
 | `zeta20.py` | ramified-and-split test in ℚ(ζ₂₀) with native φ-pairs: dense 4-chromatic cores, no forcing |
 | `nonagon.py` | ninefold analogue in ℚ(ζ₉): no seed exists; arc census; template cores empty or 3-chromatic |
 | `spindle15.py` | Moser-twisted ζ₁₅ world (both φ-pairs and triangles) |
