@@ -101,7 +101,8 @@ and I_out = 127751/96000 (`control.py`). The optimal split, 170/69, gives only �
 
 **Empirical check.** `test_in.py` evaluates the exact finite bound γ_p^in, with every
 hypothesis of the proposition enforced, against the true valuation at K = 40, 80, 120. There
-are **0 violations**, including all 5 primes in the new window. The bound is exactly tight at
+are **0 violations**, including all 5 primes in the new window. A further run at K = 160
+(`rows160.json`) adds p = 59, 61 in the window, again with no violation. The bound is exactly tight at
 two of them, and there it beats the outer bound by 17–62 valuation units per prime.
 
 **Combined result** (certified real side plus this change): margin 0.0868 per K² at
