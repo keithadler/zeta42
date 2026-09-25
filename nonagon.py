@@ -40,22 +40,47 @@ Answer (all exact except (1), which is a continuous check):
    inert-then-split (two primes of degree 3) -> 2 x 18 = 36 each, and 19
    (= 1 mod 9) splits completely -> (3^3 - 1) x 18 = 468.
 
-4. The G1 template (`hept_g1.py`: T-sets between a designated pair, degree
-   filter against the smaller T-set, k-core) on the 54-arc alphabet
-   (18 roots + 36 over 7), pair 0 -- i*sqrt3 and pair 0 -- 2:
-       i*sqrt3:  T5 = 442, T6 = 5478, G0 = 446, 7-core EMPTY (6-core too)
-       2:        T5 = 399, T6 = 4425, G0 = 403, 7-core EMPTY
-   For comparison Haugland's 84-arc heptagonal alphabet gives T5 = 1042,
-   T6 = 12856 and a 740-vertex 7-core.  Denser Q(zeta_9) alphabets
-   (7 + 13, and the 486-arc denominator-19 system) are being measured.
+4. The G1 template (`hept_g1.py`: T_n = vertices on arc-paths of <= n steps
+   between a designated pair, G0 = T_(n-1) plus the T_n vertices with >= k
+   neighbours in it, then the k-core) on every small-denominator alphabet,
+   for the pair 0 -- i*sqrt3 (Haugland's) and 0 -- 2 (the distance-2
+   campaign's).  Directed queries: can the pair share a colour at k = 4, 5?
+
+     alphabet (arcs)     pair     n  core   T_n     core size     chi  forced?
+     roots only (18)     i*sqrt3  6  7      438     empty
+     1+7 (54)            i*sqrt3  6  6,7    5478    empty
+     1+7 (54)            2        6  6,7    4425    empty
+     1+7+13 (90)         i*sqrt3  6  5      15642   776v/2945e    3    no/no
+     1+7+13 (90)         i*sqrt3  6  6,7    15642   empty
+     1+7+13 (90)         2        6  6      12289   621v/2314e    3    no/no
+     1+7+13 (90)         2        6  7      12289   empty
+     1+19 (486)          i*sqrt3  5  7..14  8726    empty (G0 = T4)
+     1+19 (486)          2        5  7..14  7559    empty (G0 = T4)
+
+   Haugland's 84-arc heptagonal alphabet at the same depth: T5 = 1042,
+   T6 = 12856, 7-core 740v/3985e, 5-chromatic, pair forced at k = 4.
+   Every surviving Q(zeta_9) core is 3-chromatic with its pair free at
+   k = 4 and 5.  The 486-arc system is the sharpest case: nominally six times
+   the heptagonal alphabet, yet no T5 vertex has even 7 neighbours in T4.
+
+Verdict: the approach that produces the heptagonal world has no ninefold
+solution.  The seed does not exist; the best nonagonal substitute adds no
+arcs; and the arcs Q(zeta_9) does have (over 7, 13, 19) build path lattices
+that stay 3-chromatic under the template.  This is the same fate as
+Q(zeta_5) (`pent_b.py`, `pent_b2.py`), and point 3 suggests the common
+cause for the open question in note.md section 4: the denominator-7 system
+of Q(zeta_42) is fed by a prime that is totally ramified in the n-part *and*
+split in the CM direction.  For n = 9 no prime is both.
 
 Usage:
     ./.venv/bin/python nonagon.py              # (1)-(3), ~2 min at height 3
+    ./.venv/bin/python nonagon.py --template   # (4), ~15 min
 """
 
 import cmath
 import itertools
 import math
+import sys
 import time
 from collections import Counter
 from fractions import Fraction
@@ -184,5 +209,115 @@ def main():
     print(f"  denominator 3: {len(census.get(3, []))}   [{time.time()-t0:.0f}s]")
 
 
+# ---------------------------------------------------- (4) G1 template ------
+
+def _add(u, v):
+    return tuple(x + y for x, y in zip(u, v))
+
+
+def _sub(u, v):
+    return tuple(x - y for x, y in zip(u, v))
+
+
+def path_sets(steps, B, ns, radius):
+    """{n: T_n} for the pair 0 -- B: points v with d(0,v) + d(v,B) <= n.
+
+    Exact distances are tabulated up to `radius`; beyond it d(x) <= k is
+    decided by peeling steps (x - s, k - 1), which is cheap because every
+    point on a short path lies within `radius` of one endpoint.  (The
+    meet-in-the-middle of `hept_g1.build_T` is quadratic in the ball and too
+    slow for the 486-arc alphabet.)  Needs max(ns) <= 2 * radius + 1.
+    """
+    from hept_g1 import balls
+    assert max(ns) <= 2 * radius + 1
+    ball = balls(steps, radius)
+
+    def le(x, k):
+        d = ball.get(x)
+        if d is not None:
+            return d <= k
+        if k <= radius:
+            return False
+        return any(le(_sub(x, s), k - 1) for s in steps)
+
+    out = {}
+    for n in ns:
+        T = set()
+        for v, d in ball.items():
+            if d <= n:
+                if le(_sub(v, B), n - d):
+                    T.add(v)
+                w = _add(v, B)
+                if le(w, n - d):
+                    T.add(w)
+        out[n] = T
+    return out
+
+
+def kcore(steps, verts, k):
+    adj = {v: {w for w in (_add(v, s) for s in steps) if w in verts}
+           for v in verts}
+    changed = True
+    while changed:
+        changed = False
+        for v in [v for v, ns in adj.items() if len(ns) < k]:
+            for w in adj[v]:
+                adj[w].discard(v)
+            del adj[v]
+            changed = True
+    return adj
+
+
+def template(fld, arcs, B_el, n, ks, radius, log=print):
+    """Haugland's G1 recipe on `arcs` between 0 and B_el, for each core k."""
+    from colour import chromatic_number
+    from rigidity import directed_query
+
+    S = math.lcm(*(denominator(a) for a in arcs + [B_el]))
+    steps = [tuple(int(c * S) for c in a) for a in arcs]
+    B, A = tuple(int(c * S) for c in B_el), (0,) * fld.dim
+    T = path_sets(steps, B, (n - 1, n), radius)
+    small, big = T[n - 1], T[n]
+    for k in ks:
+        G0 = {v for v in big if v in small
+              or sum(_add(v, s) in small for s in steps) >= k}
+        core = kcore(steps, G0, k)
+        line = (f"  n={n} {k}-core: T{n-1}={len(small)} T{n}={len(big)} "
+                f"G0={len(G0)} core={len(core)}")
+        if A in core and B in core:
+            g = UDG(fld, [tuple(Fraction(c, S) for c in v) for v in sorted(core)])
+            ai = g.index_of(tuple(Fraction(c, S) for c in A))
+            bi = g.index_of(tuple(Fraction(c, S) for c in B))
+            line += f" ({len(g.edges)} edges) chi={chromatic_number(g, 2, 6)}"
+            for kk in (4, 5):
+                verdict, _ = directed_query(g, kk, ai, bi, budget_s=300)
+                line += f"  k={kk} pair-mono {verdict}"
+        elif core:
+            line += "  (pair fell out)"
+        log(line)
+
+
+def template_main():
+    fld = field()
+    t0 = time.time()
+    census = arc_census(fld, 3)
+    roots = census[1]
+    log = lambda m: print(m, flush=True)
+    log(f"census [{time.time()-t0:.0f}s]")
+    pairs = (("i*sqrt3", fld.sub(fld.zeta(3), fld.zeta(15))),
+             ("2", fld.rat(2)))
+    runs = (("roots only", roots, 6, (7,), 3),
+            ("1+7", roots + census[7], 6, (6, 7), 3),
+            ("1+7+13", roots + census[7] + census[13], 6, (5, 6, 7), 3),
+            ("1+19", roots + census[19], 5, (7, 10, 14), 2))
+    for name, arcs, n, ks, radius in runs:
+        for pname, B_el in pairs:
+            log(f"\n{name} ({len(arcs)} arcs), pair 0 -- {pname}")
+            template(fld, arcs, B_el, n, ks, radius, log=log)
+
+
 if __name__ == "__main__":
-    main()
+    if "--template" in sys.argv:
+        template_main()
+    else:
+        main()

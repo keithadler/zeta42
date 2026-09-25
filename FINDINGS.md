@@ -108,6 +108,23 @@ script, not inferred.
     cores — screens, dials, parameter sweeps — where 6-8x is automatic), and
     run single hard proofs on one fast core under kissat.
 
+13b. **The ninefold world Q(zeta_9) has no Haugland solution.** `nonagon.py`
+    - No seed: a unit equilateral triangle with a vertex on each of three
+      {9/k} circumcircles does not exist even under free rotation (closest
+      miss 0.068; the n=7 control is exact; none for n=11, 13 either).
+    - Best exact phasing in Q(zeta_18) (degree 6 -- zeta_6 comes free):
+      {9/1},{9/2},{9/4}, 27v/81e, 6-regular, chi 3, and all 18 edge
+      directions are roots of unity -- a lattice patch, no new arcs.
+    - Arc census (height <= 3, method reproduces Q(zeta_5)'s 90 over 11):
+      denominator 3: 0, 7: 36, 13: 36, 19: 468 (+18 roots).  3 is the only
+      ramified prime and it ramifies in Q(sqrt-3) too, so it yields nothing;
+      Q(zeta_42)'s 7 is ramified in zeta_7 AND split in zeta_3.
+    - G1 template on 54-, 90- and 486-arc alphabets, pairs 0--i*sqrt3 and
+      0--2, paths <= 6 (<= 5 for 486): every 7-core EMPTY.  Largest
+      survivors (5-core 776v, 6-core 621v, 90 arcs) are 3-chromatic, pair
+      free at k=4 and 5.  The 486-arc system: no T5 vertex has 7 neighbours
+      in T4.  Arc count is not density -- a data point for note.md section 4.
+
 ## Interpretation (running)
 
 - Level-4 forcing primitives are tight (spindle: 7 vertices force 4 colours).

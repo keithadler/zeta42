@@ -66,6 +66,7 @@ measured and what the result was):
 | `census.py` | cross-field unit-coincidence census |
 | `alpha510.py` | independence number probe (fractional bound diagnostic) |
 | `pent_b.py`, `pent_b2.py` | Haugland-template transplant to ℚ(ζ₅) (cores empty) |
+| `nonagon.py` | ninefold analogue in ℚ(ζ₉): no seed exists; arc census; template cores empty or 3-chromatic |
 | `spindle15.py` | Moser-twisted ζ₁₅ world (both φ-pairs and triangles) |
 | `campaign_a.py`, `rung1b.py`, `t7prep.py`, `t7pair_prep.py` | the distance-2 campaign in the heptagonal world |
 | `cnc.py`, `cnc2.py` | cube-and-conquer experiments (negative: not profitable here) |
