@@ -17,3 +17,6 @@ g3-edges.json
 
 # large rendered output (regenerate with draw.py)
 degrey-G.svg
+
+# sampled limiting-function caches (regenerate with limits_fast.py)
+*.npz
