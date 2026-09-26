@@ -114,6 +114,12 @@ real side is certified. The claim that Proposition 4.1 extends to 5/2 ≤ K/p < 
 step by step and checked numerically at small K. Small K cannot reach the admissible regime
 K ≥ 200M², so it still needs to be written out in full and checked by the formalisation.
 
+## Banded constructions
+
+`banding/` certifies the real half for the two best banded profiles from branch
+`claude/amazing-franklin-qz29gp` (R ≤ −4.71745 and −4.50609). It also shows how lossy their
+still-unproven arithmetic half may be and still beat the record. See `banding/README.md`.
+
 ## Reproduce
 
 ```
