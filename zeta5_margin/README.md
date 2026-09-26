@@ -1,8 +1,21 @@
 # ζ(5): larger proven margins for Fauzan's proof
 
-Two independent improvements: a better comparison measure (real side, certified), and a
-wider inner prime range (arithmetic side, exact integrals, proof modification). Combined:
-decay 79.07 → 138.9 (M = 100000) and irrationality measure 260 → 148.
+## Summary of results
+
+| | proven margin per K² (M = 100000) | irrationality measure μ | status |
+|---|---|---|---|
+| Fauzan (17 Sep 2026) | 0.0494 | 260 | published |
+| + better comparison measure (real side) | 0.0674 | **191** | **certified** (arb ball arithmetic) |
+| + inner prime range extended to K/p ≥ 5/2 (arithmetic side) | **0.0868** | **148** | exact integrals, tested; proof write-up pending |
+| banded construction (4,4,3,2,0,0), rows ×1.2 (see `banding/`) | **≈ 0.110–0.118** | not yet derived | real half certified; arithmetic half estimated with generalised bounds tested against exact valuations |
+
+All figures reproduce from the scripts in this directory. The banding construction was
+published earlier by the repository owner (about 30% better on actual values). `banding/`
+adds its provable side.
+
+Two independent improvements to Fauzan's own construction: a better comparison measure (real
+side, certified), and a wider inner prime range (arithmetic side, exact integrals, proof
+modification). Combined: decay 79.07 → 138.9 (M = 100000) and irrationality measure 260 → 148.
 
 ## Real side: a better comparison measure
 
