@@ -44,12 +44,41 @@ construction and still beat the record. If it is equally tight, the margin rises
 today's record. The actual values are small-n (K ≤ 120) and drift with K, so the right-hand
 columns are estimates. The certified R values are exact bounds.
 
+## Arithmetic half: generalised bounds and the resulting margin (`arith/`)
+
+The proof's three prime ranges generalise to any band profile and any number of rows:
+
+| primes | bound | check against the true valuations |
+|---|---|---|
+| p > K | scalar only (v_p(Δ) = 0) | v_p(Δ) = 0 at every such prime, K = 40 and 80 |
+| K/2 < p ≤ K | `gout_general.py`: per-class outer count, numerator credit (e_a+1)/2, extra rows at weight 0, rank correction `r = 2h + 2 − 2p + deg W − #poles` | reproduces the paper's γ^out exactly; **exact** on banded (14 primes, zero slack) |
+| p ≤ K/2 | `gin_general.py`: inner basis, each row weighted by the minimum of its source half-bounds | 0 violations, paper and banded; banded within 0–5 of the truth |
+
+Asymptotic constant (`limits_fast.py`): sample the limiting functions with a large prime and
+integrate. **Control:** on Fauzan's profile it reproduces R(x), the outer function, and
+A = A_* − 187/9600 to within 0.0085 (the calibration below).
+
+| construction | A (raw … calibrated) | certified U = R + C* | **provable margin** | vs today's record 0.0868 |
+|---|---|---|---|---|
+| bands (4,4,3,2,0,0) ×1.20 | 1.8105 … 1.8190 | −1.92891 | **0.110 … 0.118** | +27 … +36% |
+| bands (5,4,2,1,0) ×1.15 | 1.7740 … 1.7825 | −1.87599 | **0.094 … 0.102** | +8 … +18% |
+
+True arithmetic constant at finite K for (4,4,3,2,0,0): 1.5505 (K=40), 1.6848 (80), 1.6805 (120).
+
+**Status.** The real half is certified. The arithmetic half is the paper's argument generalised
+and tested against exact valuations. Its constant is a numerical integral of the limiting
+functions, not yet an exact rational, and the bounds are not yet written as proofs. The
+irrationality measure μ for banding also needs its own relative-norm constant ϱ (deg Q = #poles,
+different numerator), which has not been derived.
+
+Useful structural fact: at large K/p the inner function has mean slope F̄ = λ(4 − e₁), with e₁
+the first band's exponent (Fauzan: e₁ = 5, F̄ = −λ). This term is a large part of A.
+
 ## Still missing
 
-The arithmetic half for banded numerators: Fauzan's prime-by-prime valuation bounds (inner
-allocation, outer classes and rank correction) redone with per-band exponents and h > #poles.
-That is the research step. `../arithmetic/slack.py` and `gamma_in.py` are the tools to start
-from.
+Written proofs of the three generalised bounds, exact integration of the banded limiting
+functions (as done for the split in `../arithmetic/exactA.py`), and ϱ for the banded
+construction.
 
 ## Reproduce
 
